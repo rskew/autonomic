@@ -1,15 +1,15 @@
 Autonomic is a tool for automating the administration of your organisation. The formalism allows setting policies that define the operating logic of your organisation, including mechanisms for the change of these policies.
 
-This repo is set up with the set of policies for beginning a game of [Nomic](Why is Nomic). The interface is implemented as a [Slack](www.slack.com) application, that you interact with by the use of [slash commands](www.slack.com/api/slach_commands) from a Slack workspace shared by your organisations members.
+This repo is set up with the set of policies for beginning a game of [Nomic](why-is-nomic). The interface is implemented as a [Slack](www.slack.com) application, that you interact with by the use of [slash commands](www.slack.com/api/slach_commands) from a Slack workspace shared by your organisations members.
 
 contents
 -
 
-1. Usage demo
-2. How to set up
-3. Why is Nomic
-4. Prolog is cool
-5. Ideas for extensions
+1. [Usage demo](usage-demo)
+2. [How to set up](how-to-set-up)
+3. [Why is Nomic](why-is-nomic)
+4. [Prolog is cool](prolog-is-cool)
+5. [Ideas for extensions](ideas-for-extensions)
 
 
 Usage Demo
@@ -24,7 +24,7 @@ How to set up
 
 You can then add this application to your Slack workspace through the following steps:
 
-- In the [workspace configuration](asdf) view, add an application and call it 'autonomic', or watever you want its posts to be labelled as.
+- In the 'workspace configuration' view, add an application and call it 'autonomic', or watever you want its posts to be labelled as.
 - Grab the auth token and save in a file called `auth.token` in the repo's top level directory.
 - Run the application on your server. You can do this with the command 'swipl autonomic.pl -p 80833', once you have [SWI Prolog](www.swiprolog.com) (an open source Prolog) installed. If you want to quickly test it out, [ngrok](www.ngrok.com) allows you to avoid the hassle of setting up a webserver and exposing ports.
 - Test it out! Type one of autonomic's slash commands in any channel of your Slack workspace.
