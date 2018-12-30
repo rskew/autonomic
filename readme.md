@@ -26,7 +26,7 @@ You can then add this application to your Slack workspace through the following 
 
 - In the 'workspace configuration' view, add an application and call it 'autonomic', or watever you want its posts to be labelled as.
 - Grab the auth token and save in a file called `auth.token` in the repo's top level directory.
-- Run the application on your server. You can do this with the command 'swipl autonomic.pl -p 80833', once you have [SWI Prolog](www.swiprolog.com) (an open source Prolog) installed. If you want to quickly test it out, [ngrok](www.ngrok.com) allows you to avoid the hassle of setting up a webserver and exposing ports.
+- Run the application on your server. You can do this with the command `swipl autonomic.pl -p 80833`, once you have [SWI Prolog](www.swiprolog.com) (an open source Prolog) installed. If you want to quickly test it out, [ngrok](www.ngrok.com) allows you to avoid the hassle of setting up a webserver and exposing ports.
 - Test it out! Type one of autonomic's slash commands in any channel of your Slack workspace.
 
 
