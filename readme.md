@@ -1,6 +1,6 @@
 Autonomic is a tool for automating the administration of your organisation. The formalism allows setting policies that define the operating logic of your organisation, including mechanisms for the change of these policies.
 
-This repo is set up with the set of policies for beginning a game of [Nomic](www.github.com/autonomic#why-is-nomic). The interface is implemented as a [Slack](www.slack.com) application, that you interact with by the use of [slash commands](www.slack.com/api/slach_commands) from a Slack workspace shared by your organisations members.
+This repo is set up with the set of policies for beginning a game of [Nomic](https://github.com/autonomic#why-is-nomic). The interface is implemented as a [Slack](www.slack.com) application, that you interact with by the use of [slash commands](www.slack.com/api/slach_commands) from a Slack workspace shared by your organisations members.
 
 contents
 -
