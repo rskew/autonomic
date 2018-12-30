@@ -1,15 +1,15 @@
 Autonomic is a tool for automating the administration of your organisation. The formalism allows setting policies that define the operating logic of your organisation, including mechanisms for the change of these policies.
 
-This repo is set up with the set of policies for beginning a game of [Nomic](https://github.com/autonomic#why-is-nomic). The interface is implemented as a [Slack](www.slack.com) application, that you interact with by the use of [slash commands](www.slack.com/api/slach_commands) from a Slack workspace shared by your organisations members.
+This repo is set up with the set of policies for beginning a game of [Nomic](https://github.com/rskew/autonomic#why-is-nomic). The interface is implemented as a [Slack](www.slack.com) application, that you interact with by the use of [slash commands](www.slack.com/api/slach_commands) from a Slack workspace shared by your organisations members.
 
 contents
 -
 
-1. [Usage demo](www.github.com/rskew/autonomic#usage-demo)
-2. [How to set up](www.github.com/rskew/autonomic#how-to-set-up)
-3. [Why is Nomic](www.github.com/rskew/autonomic#why-is-nomic)
-4. [Prolog is cool](www.github.com/rskew/autonomic#prolog-is-cool)
-5. [Ideas for extensions](www.github.com/rskew/autonomic#ideas-for-extensions)
+1. [Usage demo](https://github.com/rskew/autonomic#usage-demo)
+2. [How to set up](https://github.com/rskew/autonomic#how-to-set-up)
+3. [Why is Nomic](https://github.com/rskew/autonomic#why-is-nomic)
+4. [Prolog is cool](https://github.com/rskew/autonomic#prolog-is-cool)
+5. [Ideas for extensions](https://github.com/rskew/autonomic#ideas-for-extensions)
 
 
 Usage Demo
