@@ -1,4 +1,5 @@
-:- module(server_utils,[iso_format_timestamp/2,
+:- module(server_utils,[start_server/1,
+                        iso_format_timestamp/2,
                         current_timezone_offset/2
                        ]).
 
@@ -6,7 +7,7 @@
 :- use_module(library(http/http_dispatch)).
 :- use_module(library(dcg/basics)).
 
-server(Port) :-
+start_server(Port) :-
     write('starting server, such fun'),
     http_server(http_dispatch, [port(Port)]).
 
@@ -22,17 +23,19 @@ iso_format_timestamp(Timestamp, DateTimeStr) :-
 %% current_timezone_offset(+TimezoneStr,-Offset) is semidet
 current_timezone_offset(TimezoneStr, Offset) :-
     % Check TimezoneStr is valid
-    format(atom(TimezonePath),'/usr/share/zoneinfo/~w',TimezoneStr),
-    process_create(path(zdump), ['-v',TimezonePath], [stdout(pipe(Pipe0))]),
-    read_stream_to_codes(Pipe0,ZDumpCodes),
-    \+ once(phrase(all_lines_end_in_NULL,ZDumpCodes)),
+    format(atom(TimezonePath), '/usr/share/zoneinfo/~w', TimezoneStr),
+    process_create(path(zdump), ['-v', TimezonePath], [stdout(pipe(Pipe0))]),
+    sleep(1),
+    read_stream_to_codes(Pipe0, ZDumpCodes),
+    \+ once(phrase(all_lines_end_in_NULL, ZDumpCodes)),
     close(Pipe0),
     % Get timezone offset the easy way
     process_create(path(date), ['+%z'], [env(['TZ' = TimezoneStr]),
                                          stdout(pipe(Pipe1))]),
     read_line_to_codes(Pipe1,Codes),
     atom_codes(Line,Codes),
-    *with_output_to(user_error, format(Line)),
+    % Debug print
+    format(user_error, '~w~n', Line),
     atom_number(Line, IsoOffset),
     Minutes is mod(IsoOffset,100),
     Hours is floor(IsoOffset/100),

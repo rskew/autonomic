@@ -12,6 +12,9 @@
                               repeal_help/1,
                               repeal_confirmation/2,
                               repeal_rule_not_active/2,
+                              already_submitted_proposal/1,
+                              proposal_submission/3,
+                              not_your_turn/1
                              ]).
 
 :- use_module(db).
@@ -47,7 +50,7 @@ bad_base_rule(Number, Title, Message) :-
            [Number, Title]).
 
 base_rule_not_mutable(Number, Message) :-
-    db:current_rule(Number,_,Title,_,_,_),
+    db:rule(Number,_,Title,_,_,_),
     format(atom(Message),
            'Rule number ~w \"~w\" is not mutable',
            [Number, Title]).
@@ -61,19 +64,19 @@ transmute_help('transmute help placeholder').
 transmute_bad_base_rule(_Number, _Title, 'transmute bad base rule placeholder').
 
 base_rule_not_transmutable(Number, Message) :-
-    db:current_rule(Number,_,Title,_,_,_),
+    db:rule(Number,_,Title,_,_,_),
     format(atom(Message),
            'Rule ~w \"~w\" is not the last rule in its chain',
            [Number, Title]).
 
 transmute_invalid_target(Number, Category, Message) :-
-    db:current_rule(Number,CurrentCategory,_,_,_,_),
+    db:rule(Number,CurrentCategory,_,_,_,_),
     format(atom(Message),
            'Rule ~w with category \'~w\' cannot be transmuted into \'~w\'',
            [Number, CurrentCategory, Category]).
 
 transmute_confirmation(Number, Category, Message) :-
-    db:current_rule(Number,CurrentCategory,_,_,_,_),
+    db:rule(Number,CurrentCategory,_,_,_,_),
     format(atom(Message),
            'Transmute rule ~w with category \'~w\' into \'~w\' confirmation placeholder',
            [Number, CurrentCategory, Category]).
@@ -86,7 +89,22 @@ repeal_rule_not_active(Number, Message) :-
            [Number]).
 
 repeal_confirmation(Number, Message) :-
-    db:current_rule(Number,_,Title,_,_,_),
+    db:rule(Number,_,Title,_,_,_),
     format(atom(Message),
            'Rule ~w \"~w\" repeal confirmation placeholder',
            [Number, Title]).
+
+not_your_turn(Message) :-
+    format(atom(Message),
+           'You may only submit a proposal when it is your turn :-)',
+           []).
+
+already_submitted_proposal(Message) :-
+    format(atom(Message),
+           'You have already submitted a proposal this turn :-)',
+           []).
+
+proposal_submission(UserName, enact(Title, Body), Message) :-
+    format(atom(Message),
+           '~w has just submitted a proposal to enact:~n~w~n~w',
+           [UserName, Title, Body]).

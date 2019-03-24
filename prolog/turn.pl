@@ -1,7 +1,8 @@
-:- module(turn, [parse_turn/3,
+:- module(turn, [parse_turn/2,
                  assert_next_turn/0,
-                 next_turnid/2,
+                 next_turnid/2
                ]).
+:- use_module(library(clpfd)).
 :- use_module(library(dcg/basics)).
 :- use_module(library(uri)).
 :- use_module(db).
@@ -37,31 +38,29 @@ message_whos_turn(UserName, Timestamp, Message) :-
            [UserName, DateTime]).
 
 assert_next_turn :-
-    db:current_turnid(CurrentTurnId),
-    db:turn(CurrentTurnId, CurrentPlayerId, _, _),
+    db:current_turn(CurrentTurnId, CurrentPlayerId, _Timestamp, _ProposalId),
     next_player_in_order(CurrentPlayerId, NextPlayerId),
-    next_turnid(CurrentTurnId, NextTurnId)
+    next_turnid(CurrentTurnId, NextTurnId),
     get_time(Timestamp),
     db:assert_turn(NextTurnId, NextPlayerId, Timestamp, -1),
     post_message_turn_begin(NextPlayerId),
     % Include this goal (remove the '*') to enable timed turns
     *(
+        % TODO: remove previous alarm
         turn_period(TurnPeriodSeconds),
-        alarm(TurnPeriodSeconds, assert_next_turn, _)
+        % TODO: check if alarm is async
+        spawn(alarm(TurnPeriodSeconds, assert_next_turn, _))
     ).
-
-turn_period(TurnPeriodSeconds) :-
-    TurnPeriodSeconds #= 2 * 24 * 60 * 60.
 
 post_message_turn_begin(NextPlayerId) :-
     slack_app:userid_username(NextPlayerId, NextPlayerName),
     message_advance_turn(NextPlayerName, Message),
     slack_app:broadcast_channel(Channel),
-    slack_app:post_message(Channel, Message, _{ok="true"}).
+    slack_app:post_message(Channel, Message, _{ok:"true"}).
 
 message_advance_turn(UserName, Message) :-
     format(atom(Message),
-           'It is now ~w\'s turn!'
+           'It is now ~w\'s turn!',
            [UserName]).
 
 next_turnid(CurrentTurnId, NextTurnId) :-

@@ -1,4 +1,4 @@
-Autonomic is a tool for automating the administration of your organisation. The formalism allows setting policies that define the operating logic of your organisation, including mechanisms for the change of these policies.
+Autonomic is a tool for automating the administration of your organisation. This tool allows setting policies that define the operating logic of your organisation, with helper mechanisms for the change of these policies.
 
 This repo is set up with the set of policies for beginning a game of [Nomic](https://github.com/rskew/autonomic#why-is-nomic). The interface is implemented as a [Slack](www.slack.com) application, that you interact with by the use of [slash commands](www.slack.com/api/slach_commands) from a Slack workspace shared by your organisations members.
 
@@ -51,6 +51,10 @@ Prolog is chosen as the implementation language.
 
 - It's a lot of fun to write Prolog code :)
 - Prolog is a made for rule-based reasoning systems. It's more natural to express self-referential rule-based systems in Prolog. It's also evocative of ways to extend the system to mediate more user behaviour.
+
+TODO
+-
+Make database writing thread safe
 
 
 
